@@ -1,0 +1,109 @@
+import sys
+import time
+
+
+def type_effect(text, delay=0.02):
+    """Prints text with a typewriter effect for a more robotic feel."""
+    for char in text:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(delay)
+    print()
+
+
+def chatbot_builder():
+    type_effect("🤖: Hello Creator! I am BotForge, your chatbot-building assistant.")
+    type_effect(
+        "🤖: Together, we are going to craft a brand new chatbot script for you."
+    )
+    print("-" * 60)
+
+    # Step 1: Get the chatbot's identity
+    bot_name = input("🤖: First, what should we NAME your new chatbot? -> ")
+    if not bot_name.strip():
+        bot_name = "QuickBot"
+
+    # Step 2: Set the personality
+    type_effect(f"\n🤖: Awesome. '{bot_name}' is a great name.")
+    type_effect("🤖: Choose a personality type for them:")
+    print("    1. Friendly & Helpful")
+    print("    2. Sassy & Sarcastic")
+    print("    3. Robotic & Analytical")
+    choice = input("🤖: Enter a number (1-3) -> ")
+
+    if choice == "2":
+        personality = "sassy"
+        greeting = "Oh, great. Another human wants to talk to me. What do you want?"
+        default_reply = "I'm pretending to care, but I'm actually just code. Try asking something else."
+    elif choice == "3":
+        personality = "robotic"
+        greeting = f"BEEP BOOP. {bot_name} INITIALIZED. INPUT COMMAND USER."
+        default_reply = (
+            "ERROR 404: Context not recognized. Query outside normal parameters."
+        )
+    else:
+        personality = "friendly"
+        greeting = (
+            f"Hi there! I'm {bot_name}, your friendly AI assistant. How can I help?"
+        )
+        default_reply = "That sounds fascinating! Tell me more, or ask me something else."
+
+    # Step 3: Custom catchphrase
+    catchphrase = input(
+        f"\n🤖: What is a custom catchphrase or keyword '{bot_name}' should look for? -> "
+    ).lower()
+    catchphrase_reply = input(
+        f"🤖: When a user says '{catchphrase}', what should '{bot_name}' reply? -> "
+    )
+
+    print("-" * 60)
+    type_effect("🤖: Processing blueprints... Synthesizing logic gates...")
+    time.sleep(1)
+    type_effect("🤖: DONE! Here is the Python code for your new chatbot:\n")
+
+    # The Template Code Generation
+    bot_code = f"""# ==========================================
+# CHATBOT: {bot_name} ({personality.upper()} edition)
+# ==========================================
+
+def run_bot():
+    print("{bot_name}: {greeting}\\n")
+    print("(Type 'exit' or 'quit' to stop chatting)\\n")
+    
+    while True:
+        user_input = input("You: ").lower().strip()
+        
+        if user_input in ['exit', 'quit']:
+            print("\\n{bot_name}: Goodbye! Signing off.")
+            break
+            
+        elif "{catchphrase}" in user_input and "{catchphrase}" != "":
+            print(f"{bot_name}: {catchphrase_reply}")
+            
+        elif "hello" in user_input or "hi" in user_input:
+            if "{personality}" == "sassy":
+                print("{bot_name}: Yeah, yeah, hello. Moving on...")
+            elif "{personality}" == "robotic":
+                print("{bot_name}: GREETINGS HUMAN UNIT.")
+            else:
+                print("{bot_name}: Hello! Hope you are having a wonderful day.")
+                
+        elif "your name" in user_input:
+            print("{bot_name}: My name is {bot_name}!")
+            
+        else:
+            print("{bot_name}: {default_reply}")
+            
+if __name__ == "__main__":
+    run_bot()
+"""
+
+    print(bot_code)
+    print("-" * 60)
+    type_effect(
+        f"🤖: Just copy the code above, paste it into a new file, and run it!"
+    )
+
+
+if __name__ == "__main__":
+    chatbot_builder()
